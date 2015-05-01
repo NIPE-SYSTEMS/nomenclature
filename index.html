@@ -3,13 +3,69 @@
 	<head>
 		<title>Nomenclature</title>
 		<script>
+			function graphClearAtoms()
+			{
+				while(document.getElementById("zoomed").firstChild)
+				{
+					document.getElementById("zoomed").removeChild(document.getElementById("zoomed").firstChild);
+				}
+			}
 			
+			function graphAppendAtom(name)
+			{
+				var atom = document.createElement("div");
+				atom.className = "atom";
+				atom.innerHTML = name;
+				
+				document.getElementById("zoomed").appendChild(atom);
+			}
+			
+			window.onload = function()
+			{
+				graphClearAtoms();
+				graphAppendAtom("He");
+			};
 		</script>
 		<style type="text/css">
-			
+			#zoomed
+			{
+				position: absolute;
+				transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			.start
+			{
+				width: 50px;
+				height: 50px;
+				background-color: #EEEEEE;
+				border-radius: 25px;
+				text-align: center;
+				line-height: 50px;
+				font-size: 50px;
+			}
+			.atom
+			{
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				background-color: transparent;
+				border-radius: 25px;
+				text-align: center;
+				line-height: 50px;
+				font-size: 25px;
+				background-color: #EEEEEE;
+			}
+			.atom:hover
+			{
+				background-color: #DDDDDD;
+			}
+			.atom.active
+			{
+				background-color: #DDDDDD;
+				box-shadow: 0 0 0 5px #EEEEEE;
+			}
 		</style>
 	</head>
 	<body>
-		Hello World!
+		<div id="zoomed"></div>
 	</body>
 </html>
